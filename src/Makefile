@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for $(LIB_PREFIX)os3
 #
 # This file was generated with the command:
-#  opp_makemake --make-so -f --deep -KINET4_4_PROJ=../../inet4.4 -DINET_IMPORT -I/opt/homebrew/Cellar/curl/7.83.1/include/curl -I$$\(INET4_4_PROJ\)/src -L$$\(INET4_4_PROJ\)/src -lcurl -lINET$$\(D\)
+#  opp_makemake --make-so -f --deep -KINET_PROJ=../../inet -DINET_IMPORT -I$$\(INET_PROJ\)/src -L$$\(INET_PROJ\)/src -lcurl -lINET$$\(D\)
 #
 
 # Name of target to be created (-o option)
@@ -14,13 +14,13 @@ TARGET_IMPDEF = $(TARGET_NAME)$(IMPDEF_SUFFIX)
 TARGET_FILES = $(TARGET_DIR)/$(TARGET)
 
 # C++ include paths (with -I)
-INCLUDE_PATH = -I/opt/homebrew/Cellar/curl/7.83.1/include/curl -I$(INET4_4_PROJ)/src
+INCLUDE_PATH = -I$(INET_PROJ)/src
 
 # Additional object and library files to link with
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS = $(LDFLAG_LIBPATH)$(INET4_4_PROJ)/src  -lcurl -lINET$(D)
+LIBS = $(LDFLAG_LIBPATH)$(INET_PROJ)/src  -lcurl -lINET$(D)
 
 # Output directory
 PROJECT_OUTPUT_DIR = ../out
@@ -57,7 +57,7 @@ MSGFILES =
 SMFILES =
 
 # Other makefile variables (-K)
-INET4_4_PROJ=../../inet4.4
+INET_PROJ=../../inet
 
 #------------------------------------------------------------------------------
 
@@ -78,7 +78,7 @@ include $(CONFIGFILE)
 # Simulation kernel and user interface libraries
 OMNETPP_LIBS = -loppenvir$D $(KERNEL_LIBS) $(SYS_LIBS)
 ifneq ($(PLATFORM),win32)
-LIBS += -Wl,-rpath,$(abspath $(INET4_4_PROJ)/src)
+LIBS += -Wl,-rpath,$(abspath $(INET_PROJ)/src)
 endif
 
 COPTS = $(CFLAGS) $(IMPORT_DEFINES) -DINET_IMPORT $(INCLUDE_PATH) -I$(OMNETPP_INCL_DIR)
@@ -137,7 +137,9 @@ endif
 
 .PHONY: all clean cleanall depend msgheaders smheaders
 
-.SUFFIXES: .cc
+# disabling all implicit rules
+.SUFFIXES :
+.PRECIOUS : %_m.h %_m.cc
 
 $O/%.o: %.cc $(COPTS_FILE) | msgheaders smheaders
 	@$(MKPATH) $(dir $@)

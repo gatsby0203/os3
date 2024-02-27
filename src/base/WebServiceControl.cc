@@ -344,8 +344,7 @@ TLEData WebServiceControl::evaluateTLEData(std::string dataString, std::string s
     TLEData resultData;
 
     // Find satellite with name satName
-    unsigned int pos = dataString.find(satName);
-    //const size_t pos = dataString.find(satName);
+    const size_t pos = dataString.find(satName);
 
     if (pos == std::string::npos) {
         error("Error in WebServiceControl::evaluateTLEData(): satellite can not be found!");

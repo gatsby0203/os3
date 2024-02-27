@@ -14,7 +14,7 @@
 //
 
 #include "SatSGP4Mobility.h"
-#include "../libnorad/cJulian.h";
+#include "../libnorad/cJulian.h"
 
 #include <ctime>
 #include <cmath>
@@ -62,13 +62,11 @@ void SatSGP4Mobility::initialize(int stage)
 
 bool SatSGP4Mobility::isOnSameOrbitalPlane(double raan2, double inclination2)
 {
-    bool samePlane = false;
-    double raan = getRaan();
+    bool samePlane;
+//    double raan = getRaan();
     double inclination = getInclination();
-    if((inclination >= inclination2-1 && inclination <= inclination2+1))
-    {
-        return true;
-    }
+    samePlane = (inclination >= inclination2-1 && inclination <= inclination2+1);
+    return samePlane;
 }
 
 double SatSGP4Mobility::getAltitude() const

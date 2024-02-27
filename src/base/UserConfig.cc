@@ -53,8 +53,7 @@ void UserConfig::initializeSatMobility()
         if (mob != nullptr)
             satmoVector.push_back(mob);
         else {
-            std::sprintf(name, "Error in UserConfig::initializeSatFisheyeMobility(): Could not find module \"%s\".", name);
-            error(name);
+            error("Error in UserConfig::initializeSatFisheyeMobility(): Could not find module \"%s\".", name);
         }
     }
 }
