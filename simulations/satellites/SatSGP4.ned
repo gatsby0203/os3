@@ -3,7 +3,8 @@ package os3.simulations.satellites;
 
 import os3.base.Satellite;
 import os3.base.MissionControlCenter;
-
+// Visualizer
+import inet.visualizer.common.IntegratedVisualizer;
 //
 // Network SatSGP4 enables satellite movement on worldmap
 //
@@ -16,13 +17,16 @@ network SatSGP4
         @display("bgi=background_earth;bgb=2160,1080");
 
     submodules:
-        satellite[numOfSats]: Satellite {
-            parameters:
-                @display("p=96,92;r=10,,#707070;i=device/satellite_l");
+        visualizer: IntegratedVisualizer {
+            @display("p=100,150;is=s");
         }
         MCC[numOfMCCs]: MissionControlCenter {
             parameters:
                 @display("p=232,92;i=misc/building;r=10,,black");
+        }
+        satellite[numOfSats]: Satellite {
+            parameters:
+                @display("p=96,92;r=10,,#707070;i=device/satellite_l");
         }
     connections allowunconnected:
 }
